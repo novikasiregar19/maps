@@ -1,0 +1,386 @@
+<div id="tambah" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Tambah Data Pemeliharaan</h4>
+                                    </div>
+                                    <form action="" method="post">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-table" for="id_alat">Nama Alat</label>
+                                                <select name="id_al" id="alat" class="form-control" required>
+                                                <option value="">-Pilih Alat-</option>
+                                                <?php
+                                                $sql_alat = mysqli_query($conn, "SELECT * FROM alat WHERE status = 1") or die
+                                                    (mysqli_error($conn));
+                                                while($alat = mysqli_fetch_array($sql_alat)) {
+                                                    echo '<option value="'.$alat['id_al'].'">' 
+                                                    .$alat['nama_alat'].'</option>';
+                                                }
+                                                ?>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="kegiatan">Nama Kegiatan</label>
+                                                <select name="id_k" id="kegiatan" class="form-control" required>
+                                                <option value="">-Pilih Kegiatan-</option>
+                                                <?php
+                                                $sql_keg = mysqli_query($conn, "SELECT * FROM kegiatan WHERE status = 1") or die
+                                                (mysqli_error($conn));
+                                                    while($kegiatan = mysqli_fetch_array($sql_keg)) {
+                                                        echo '<option value="'.$kegiatan['id_k'].'">' 
+                                                        .$kegiatan['nama_keg'].'</option>';
+                                            }
+                                                ?>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="modal-footer">
+                                                <button type="reset" class="btn btn-danger">Reset</button>
+                                                <input type="submit" class="btn btn-success" name="tambah" value="Simpan">
+                                         </div>
+                                    </form>
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+
+==========================
+
+
+
+<div id="status<?php echo $row['id_p']?>" class="modal fade" role="dialog">        
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Status Pemeliharaan</h4>
+                                    </div>
+                                    
+                                    <?php
+                                    if($row['status_pem'] == 0)
+                                    {
+                                    ?>
+                                    <form action="" method="post">
+                                    <div class="modal-body">
+                                    Aktifkan <?php echo $row['nama_pem']?> ?
+
+                                    <div class="modal-footer">
+                                    <input hidden type="text" name="id_p" value="<?php echo $row['id_p']?>" class="form-control" id="id_p">
+                                        <input type="submit" class="btn btn-success" name="status" value="Aktif">
+                                </div>
+                                </div>      
+                                </form>                        
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <form action="" method="post">
+                                        <div class="modal-body">
+                                    Disable <?php echo $row['nama_pem']?> ?
+
+                                    <div class="modal-footer">           
+                                    <input hidden type="text" name="id_p" value="<?php echo $row['id_p']?>" class="form-control" id="id_p">
+                                        <input type="submit" class="btn btn-success" name="statusdis" value="Disable">
+                                </div>
+                                </div>
+                                </form>
+                                        <?php
+                                    }
+                                    ?>
+                                       
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+==========================
+
+<div id="hapus<?php echo $row['id_p']?>" class="modal fade" role="dialog">        
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Hapus Data Pemeliharaan</h4>
+                                    </div>
+                                    <form action="" method="post">
+                                        <div class="modal-body">
+                                            Yakin nih Hapus <?php echo $row['nama_pem']?> ?
+
+                                            <div class="modal-footer">
+                                            <input type="hidden" name="id_p" value="<?php echo $row['id_p']?>" class="form-control" id="id_p">
+                                                <input type="submit" class="btn btn-success" name="hapus" value="Hapus">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+===========================
+
+
+  <div id="edit_tambah<?php echo $row['id_p']?>" class="modal fade" role="dialog">
+                                    
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Edit Data Pemeliharaan</h4>
+                                            </div>
+                                            <form action="" method="post">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label class="control-table" for="id_alat">Nama Alat</label>
+                                                        <select name="id_al" id="alat" class="form-control" required>
+                                                        <option value="<?= $row['id_al']; ?>">--<?= $row['nama_alat']; ?> --</option>
+                                                        <?php
+                                                        $sql_alat = mysqli_query($conn, "SELECT * FROM alat") or die
+                                                            (mysqli_error($conn));
+                                                        while($alat = mysqli_fetch_array($sql_alat)) {
+                                                            echo '<option value="'.$alat['id_al'].'">' 
+                                                            .$alat['nama_alat'].'</option>';
+                                                        }
+                                                        ?>
+                                                        </select>
+                                                    </div>
+        
+                                                    <div class="form-group">
+                                                        <label for="kegiatan">Nama Kegiatan</label>
+                                                        <select name="id_k" id="kegiatan" class="form-control" required>
+                                                        <option value="<?= $row['id_k']; ?>">--<?= $row['nama_keg']; ?> --</option>
+                                                        <?php
+                                                        $sql_keg = mysqli_query($conn, "SELECT * FROM kegiatan") or die
+                                                            (mysqli_error($conn));
+                                                        while($kegiatan = mysqli_fetch_array($sql_keg)) {
+                                                            echo '<option value="'.$kegiatan['id_k'].'">' 
+                                                            .$kegiatan['nama_keg'].'</option>';
+                                                        }
+                                                        ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-table" for="nama_pem">Nama Pemeliharaan</label>
+                                                        <input type="text" name="nama_pem" value="" class="form-control" id="nama_pem" required>
+                                                    </div>
+        
+                                                    <div class="modal-footer">
+                                                    <input type="hidden" name="id_p" value="<?php echo $row['id_p']?>" class="form-control" id="id_k">
+                                                        <button type="reset" class="btn btn-danger">Reset</button>
+                                                        <input type="submit" class="btn btn-success" name="edit_tambah" value="Simpan">
+                                             </div>
+                                                </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+==================
+
+<div id="edit<?php echo $row['id_p']?>" class="modal fade" role="dialog">
+                                    
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit Data Pemeliharaan</h4>
+                                    </div>
+                                    <form action="" method="post">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-table" for="id_alat">Nama Alat</label>
+                                                <select name="id_al" id="alat" class="form-control" required>
+                                                <option value="<?= $row['id_al']; ?>">--<?= $row['nama_alat']; ?> --</option>
+                                                <?php
+                                                $sql_alat = mysqli_query($conn, "SELECT * FROM alat") or die
+                                                    (mysqli_error($conn));
+                                                while($alat = mysqli_fetch_array($sql_alat)) {
+                                                    echo '<option value="'.$alat['id_al'].'">' 
+                                                    .$alat['nama_alat'].'</option>';
+                                                }
+                                                ?>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="kegiatan">Nama Kegiatan</label>
+                                                <select name="id_k" id="kegiatan" class="form-control" required>
+                                                <option value="<?= $row['id_k']; ?>">--<?= $row['nama_keg']; ?> --</option>
+                                                <?php
+                                                $sql_keg = mysqli_query($conn, "SELECT * FROM kegiatan") or die
+                                                    (mysqli_error($conn));
+                                                while($kegiatan = mysqli_fetch_array($sql_keg)) {
+                                                    echo '<option value="'.$kegiatan['id_k'].'">' 
+                                                    .$kegiatan['nama_keg'].'</option>';
+                                                }
+                                                ?>
+                                                </select>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                            <input type="hidden" name="id_p" value="<?php echo $row['id_p']?>" class="form-control" id="id_k">
+                                                <button type="reset" class="btn btn-danger">Reset</button>
+                                                <input type="submit" class="btn btn-success" name="edit" value="Simpan">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+=========================
+
+ <div id="edit_pem<?php echo $row['id_p']?>" class="modal fade" role="dialog">
+                                    
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Edit Data Pemeliharaan</h4>
+                                            </div>
+                                            <form action="" method="post">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label class="control-table" for="id_alat">Nama Alat</label>
+                                                        <select name="id_al" id="alat" class="form-control" required>
+                                                        <option value="<?= $row['id_al']; ?>">--<?= $row['nama_alat']; ?> --</option>
+                                                        <?php
+                                                        $sql_alat = mysqli_query($conn, "SELECT * FROM alat") or die
+                                                            (mysqli_error($conn));
+                                                        while($alat = mysqli_fetch_array($sql_alat)) {
+                                                            echo '<option value="'.$alat['id_al'].'">' 
+                                                            .$alat['nama_alat'].'</option>';
+                                                        }
+                                                        ?>
+                                                        </select>
+                                                    </div>
+        
+                                                    <div class="form-group">
+                                                        <label for="kegiatan">Nama Kegiatan</label>
+                                                        <select name="id_k" id="kegiatan" class="form-control" required>
+                                                        <option value="<?= $row['id_k']; ?>">--<?= $row['nama_keg']; ?> --</option>
+                                                        <?php
+                                                        $sql_keg = mysqli_query($conn, "SELECT * FROM kegiatan") or die
+                                                            (mysqli_error($conn));
+                                                        while($kegiatan = mysqli_fetch_array($sql_keg)) {
+                                                            echo '<option value="'.$kegiatan['id_k'].'">' 
+                                                            .$kegiatan['nama_keg'].'</option>';
+                                                        }
+                                                        ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-table" for="nama_pem">Nama Pemeliharaan</label>
+                                                        <input type="text" name="nama_pem" value="<?php echo $row['nama_pem']?>" class="form-control" id="nama_pem" required>
+                                                    </div>
+        
+                                                    <div class="modal-footer">
+                                                    <input type="hidden" name="id_p" value="<?php echo $row['id_p']?>" class="form-control" id="id_k">
+                                                        <button type="reset" class="btn btn-danger">Reset</button>
+                                                        <input type="submit" class="btn btn-success" name="edit" value="Simpan">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+====================
+
+ <?php
+                                        // $sql="SELECT pemeliharaan.id_p,pemeliharaan.status_pem,pemeliharaan.nama_pem,kegiatan.nama_keg,alat.nama_alat,pemeliharaan.id_keg,pemeliharaan.id_alat
+                                        $sql="SELECT *
+                                        FROM pemeliharaan, kegiatan, alat
+                                        WHERE pemeliharaan.id_k=kegiatan.id_k AND pemeliharaan.id_al=alat.id_al";
+                                        $result=mysqli_query($conn,$sql);
+                                        if(!$conn){
+                                            die("Could not connect to the database".mysqli_connect_error());
+                                        }
+                                        while($row=mysqli_fetch_array($result)){
+                                    ?>
+
+
+================
+
+ <tr>
+                                        <th><input type="checkbox" class="checkItem" value="<?= $row['id_p'] ?>" name="id_p[]"></th>
+                                        <th scope="row"><?= $row['nama_alat']; ?></th>
+                                        <th scope="row"><?= $row['nama_keg']; ?></th>
+                                        <td><?= $row['nama_pem']; ?></td>
+                                        <td><?php
+                                        if($row['status_pem'] == "0")
+                                        {
+                                            $nilaistatus = "Disable";
+                                        } 
+                                        else
+                                        {
+                                            $nilaistatus = "Aktif";
+                                        }
+                                        echo "$nilaistatus";
+                                        ?></td>
+                                        <td>
+                                        <?php
+                                        if($row['status_pem'] == 1)
+                                    {
+                                        if($row['nama_pem'] == "0")
+                                        {
+                                        ?>
+                                            <a href="#edit<?php echo $row['id_p']?>" data-toggle="modal"><i class="fa fa-book"></i></a>
+                                        <?php
+                                        } 
+                                        else
+                                        {
+                                            ?>
+                                            <a href="#edit_pem<?php echo $row['id_p']?>" data-toggle="modal"><i class="fa fa-pencil"></i></a>
+                                        <?php
+                                        } 
+                                        ?>
+                                            
+
+
+                                            <a href="#status<?php echo $row['id_p']?>" data-toggle="modal"><i class="fa fa-toggle-on"></i></a>
+                                       <?php
+                                    }
+                                        else
+                                    {
+                                        ?>
+                                        <a href="#status<?php echo $row['id_p']?>" data-toggle="modal"><i class="fa fa-toggle-off"></i></a>
+                                        <?php
+                                    }
+                                    ?>
+                                            
+                                        </td>
+                                    </tr>
+                                    <?php
+                                        if($row['nama_pem'] == "0"){ ?>
+                                            <tr>
+                                                <td colspan=2><a href="#edit_pem<?php echo $row['id_p']?>" data-toggle="modal">Tambah Sub Kegiatan</a></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <?php
+                                        }
+
+                                        else{ ?>
+                                            <tr>
+                                            <td colspan=2><a href="#edit_tambah<?php echo $row['id_p']?>" data-toggle="modal">Tambah Sub Kegiatan</a></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
