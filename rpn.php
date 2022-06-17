@@ -41,8 +41,8 @@
   </div>
                             <?php
                                 $id_rpn = $_POST['id_rpn']; 
-                                $nama_alat = $_POST['nama_alat'];
-                                $nama_merk = $_POST['nama_merk'];
+                                $id_al = $_POST['id_al'];
+                                $id_m = $_POST['id_m'];
                                 $komponen = $_POST['nama_pem'];
                                 $lokasi = $_POST['lokasi'];
                                 $sev = $_POST['sev'];
@@ -54,7 +54,7 @@
                                 if(isset($_POST['tambah'])){
                                    
                                     //tambah
-                                    $sql = "INSERT into rpn values (NULL,'$nama_alat','$nama_merk','$komponen','$lokasi','$sev','$occ','$detect')";
+                                    $sql = "INSERT into rpn values (NULL,'$id_al','$id_m','$komponen','$lokasi','$sev','$occ','$detect')";
                                     if(mysqli_query($conn, $sql))
                                     {
                                         $nilaihasil = "Records inserted successfully.";
@@ -111,7 +111,7 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $sql="SELECT * FROM alat, merk, pemeliharaan, rpn";
+                                        $sql="SELECT * FROM rpn INNER JOIN alat on rpn.id_al=alat.id_al INNER JOIN merk on rpn.id_m=merk.id_m";
                                         $result=mysqli_query($conn,$sql);
                                         if(!$conn){
                                             die("Could not connect to the database".mysqli_connect_error());
